@@ -389,13 +389,102 @@ body {
   height: 18px;
 }
 
+/* Carrossel */
+.equipe {
+  --espaco: 16px;
+  --quantidade: 3;
 
-/* carrossel */
-
-.splide__slide img {
-  height: 480px;
+  width: 100%;
+  padding: 40px 16px;
+  box-sizing: border-box;
 }
 
+.conhecer-alunos {
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+.carrossel-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.carrossel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carrossel::-webkit-scrollbar {
+  display: none;
+}
+
+.lista-imagens {
+  display: flex;
+  gap: var(--espaco);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.imagem-carrossel {
+  flex: 0 0 calc(
+    (100% - (var(--quantidade) - 1) * var(--espaco))
+    / var(--quantidade)
+  );
+
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.imagem-carrossel img {
+  display: block;
+  width: 100%;
+  height: 480px;
+
+  /* Mostra a imagem inteira, sem cortar */
+  object-fit: contain;
+}
+
+.carrossel-botao {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+
+  background-color: #222;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.carrossel-botao:hover {
+  background-color: #444;
+}
+
+.carrossel-botao:focus-visible,
+.carrossel:focus-visible {
+  outline: 3px solid #008cff;
+  outline-offset: 3px;
+}
+
+.anterior {
+  left: 0;
+}
+
+.proximo {
+  right: 0;
+}
 
 /* Rodapé */
 .rodape {
@@ -547,6 +636,10 @@ body {
   .lista-plataformas {
     justify-content: center;
   }
+
+  .equipe {
+    --quantidade: 2;
+  }
 }
 
 /* Notebooks e telas de altura reduzida (desktop): encaixa TODA a capa na altura
@@ -581,4 +674,24 @@ body {
                 transparent 80%);
   }
 
+}
+
+@media (max-width: 600px) {
+  .equipe {
+    --quantidade: 1;
+  }
+
+  .carrossel-container {
+    padding: 0 36px;
+  }
+
+  .carrossel-botao {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .imagem-carrossel img {
+    height: 380px;
+  }
 }

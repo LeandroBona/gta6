@@ -374,31 +374,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /// CARROSSEL 
 
-const arrayImages = []
+const listaImagem = document.querySelector("#lista-imagens");
+const carrossel = document.querySelector("#carrossel");
+const botaoAnterior = document.querySelector("#anterior");
+const botaoProximo = document.querySelector("#proximo");
 
-for(let i = 0; i <= 30; i++){
-  arrayImages.push(`./assets/imgs/senai-${i}.png`)
-} 
+// Cria as imagens de senai-0.png até senai-30.png
+listaImagem.innerHTML = "";
 
-const listaImagem = document.querySelector("#lista-imagens")
+for (let i = 0; i <= 30; i++) {
+  const item = document.createElement("li");
+  item.classList.add("imagem-carrossel");
 
-console.log(arrayImages)
+  const imagem = document.createElement("img");
+  imagem.src = `./assets/imgs/senai-${i}.png`;
+  imagem.alt = `Integrante da equipe — foto ${i + 1}`;
+  imagem.loading = "lazy";
+  imagem.draggable = false;
 
-listaImagem.innerHTML = ""
+  item.appendChild(imagem);
+  listaImagem.appendChild(item);
+}
 
-arrayImages.forEach((imagem)=>{
-   
-  const item = document.createElement("li")
-  item.classList.add("splide__slide","imagem-carrossel")
-  item.innerHTML = `<img src="${imagem}"> </img>`
-  listaImagem.appendChild(item)
-})
+// Respeita a preferência de quem desativa animações
+const movimentoReduzido = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
 
-var splide = new Splide( '.splide', {
-  type   : 'loop',
-  drag   : 'free',
-  snap   : true,
-  perPage: 3,
-} );
+function moverCarrossel(direcao) {
+  const primeiroItem = listaImagem.querySelector("li");
 
-splide.mount();
+  if (!primeiroItem) return;
+
+  const larguraImagem = primeiroItem.getBoundingClientRect().width;
+  const espaco = parseFloat(getComputedStyle(listaImagem).gap) || 0;
+  const passo = larguraImagem + espaco;
+
+  const posicaoAtual = carrossel.scrollLeft;
+  const limite = carrossel.scrollWidth - carrossel.clientWidth;
+
+  if (limite <= 0) return;
+
+  let destino = posicaoAtual + passo * direcao;
+
+  // Ao avançar no final, volta ao começo
+  if (direcao === 1 && posicaoAtual >= limite - 2) {
+    destino = 0;
+  }
+
+  // Ao voltar no começo, vai para o final
+  if (direcao === -1 && posicaoAtual <= 2) {
+    destino = limite;
+  }
+
+  carrossel.scrollTo({
+    left: Math.max(0, Math.min(destino, limite)),
+    behavior: movimentoReduzido.matches ? "instant" : "smooth"
+  });
+}
+
+botaoAnterior.addEventListener("click", () => {
+  moverCarrossel(-1);
+});
+
+botaoProximo.addEventListener("click", () => {
+  moverCarrossel(1);
+});
+
+// Permite navegar pelas setas do teclado quando o carrossel está focado
+carrossel.addEventListener("keydown", (evento) => {
+  if (evento.key === "ArrowRight") {
+    evento.preventDefault();
+    moverCarrossel(1);
+  }
+
+  if (evento.key === "ArrowLeft") {
+    evento.preventDefault();
+    moverCarrossel(-1);
+  }
+});

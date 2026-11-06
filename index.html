@@ -30,7 +30,8 @@
   <header class="capa">
     <!-- Vídeo de fundo. "muted" e "playsinline" não têm valor: são atributos
          de liga/desliga. Presentes = ligados. -->
-    <video class="capa-video" src="./assets/imgs/senai-video.mp4" autoplay loop muted playsinline preload="auto"></video>
+    <video class="capa-video" src="./assets/imgs/senai-video.mp4" autoplay loop muted playsinline
+      preload="auto"></video>
     <div class="capa-conteudo">
       <!-- Toda página precisa de um <h1>: é o título principal, o mais
            importante de todos. Aqui o título é a própria arte do jogo, então
@@ -110,54 +111,67 @@
             <!-- O alt="" é vazio porque o ícone só repete o que o texto
                  "Ver agora" já diz — não precisa ser lido duas vezes. -->
 
-              <a href="#equipe" class="botao botao-primario card-video-botao">
-                <img src="/assets/icone-play.png" alt="" class="icone-play" width="18" height="18">
-                Ver agora
-              </a>
+            <a href="#equipe" class="botao botao-primario card-video-botao">
+              <img src="/assets/icone-play.png" alt="" class="icone-play" width="18" height="18">
+              Ver agora
+            </a>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="splide" aria-label="Nossa equipe" id="equipe">
-      <h1 class="conhecer-alunos">Conheça nossos alunos de Informática para Internet e professores</h1>
-      <div class="splide__track" id="carrossel">
-        <ul class="splide__list" id="lista-imagens">
+    <section class="equipe" id="equipe" aria-labelledby="titulo-equipe">
+      <h1 class="conhecer-alunos" id="titulo-equipe">
+        Conheça nossos alunos de Informática para Internet e professores
+      </h1>
 
-        </ul>
+      <div class="carrossel-container">
+        <button class="carrossel-botao anterior" id="anterior" type="button" aria-label="Mostrar imagem anterior"
+          aria-controls="carrossel">
+          &#10094;
+        </button>
+
+        <div class="carrossel" id="carrossel" tabindex="0" role="region" aria-label="Fotos dos alunos e professores">
+          <ul class="lista-imagens" id="lista-imagens"></ul>
+        </div>
+
+        <button class="carrossel-botao proximo" id="proximo" type="button" aria-label="Mostrar próxima imagem"
+          aria-controls="carrossel">
+          &#10095;
+        </button>
       </div>
     </section>
 
-  <!-- RODAPÉ -->
-  <footer class="rodape">
-    <div class="conteudo-central rodape-conteudo">
-      <div class="rodape-logo">Informática para Internet SENAI</div>
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+      <div class="conteudo-central rodape-conteudo">
+        <div class="rodape-logo">Informática para Internet SENAI</div>
 
-      <nav class="rodape-links">
-        <a href="#">Corporativo</a>
-        <a href="#">Privacidade</a>
-        <a href="#">Configurações de cookie</a>
-        <a href="#">Política de cookies</a>
-        <a href="#">Jurídico</a>
-        <a href="#">Não vender nem compartilhar as minhas informações pessoais</a>
-      </nav>
+        <nav class="rodape-links">
+          <a href="#">Corporativo</a>
+          <a href="#">Privacidade</a>
+          <a href="#">Configurações de cookie</a>
+          <a href="#">Política de cookies</a>
+          <a href="#">Jurídico</a>
+          <a href="#">Não vender nem compartilhar as minhas informações pessoais</a>
+        </nav>
 
-      <div class="rodape-redes">
-        <a href="https://www.youtube.com/senaibr" aria-label="YouTube" class="rede-social">YT</a>
-        <a href="https://www.instagram.com/sesisenai.mafra/" aria-label="Instagram" class="rede-social"">IG</a>
+        <div class="rodape-redes">
+          <a href="https://www.youtube.com/senaibr" aria-label="YouTube" class="rede-social">YT</a>
+          <a href="https://www.instagram.com/sesisenai.mafra/" aria-label="Instagram" class="rede-social"">IG</a>
         <a href=" https://x.com/senainacional" aria-label="X / Twitter" class="rede-social">X</a>
+        </div>
+
+        <p class="rodape-direitos">&copy; 2026 Rockstar Games, Inc. GTA VI, Grand Theft Auto e marcas registradas são
+          propriedade da Take-Two Interactive Software.</p>
       </div>
+    </footer>
 
-      <p class="rodape-direitos">&copy; 2026 Rockstar Games, Inc. GTA VI, Grand Theft Auto e marcas registradas são
-        propriedade da Take-Two Interactive Software.</p>
-    </div>
-  </footer>
-
-  <script src="./node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
-  <script type="module" src="script.js"></script>
+    <script src="./node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <script type="module" src="script.js"></script>
 
 </body>
 
